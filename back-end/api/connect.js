@@ -1,6 +1,12 @@
 import { MongoClient } from "mongodb";
 
-const URI = "mongodb+srv://antoniobarros:DVUuLk0kbcZvOVi6@antonio.daxwg.mongodb.net/?retryWrites=true&w=majority&appName=Antonio";
+process.loadEnvFile();
+
+const URI = process.env.MONGO_URI;
+
+if (!URI) {
+    throw new Error("Variável de ambiente MONGO_URI não definida. Crie um arquivo .env em back-end/ (veja .env.example).");
+}
 
 const client = new MongoClient(URI);
 
